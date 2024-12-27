@@ -38,10 +38,10 @@ func main() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", start))
+	dispatcher.AddHandler(handlers.NewCommand("start", start))	
 	webhookOpts := ext.WebhookOpts{
-		Serve: "0.0.0.0",
-		ServePort: 8080,	
+		ListenAddr:  "localhost:8080",
+		Port: 8080,	
 	}
 	
 	err = updater.StartWebhook(b, "custom-path/"+token, webhookOpts)
