@@ -1,4 +1,4 @@
-module github.com/Mishel-07/Test-
+module github.com/Mishel-07/PinterestBot
 
 go 1.19
 
