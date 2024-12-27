@@ -34,13 +34,7 @@ func main() {
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
-	Port := "8080"
-		
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		fmt.Fprintf(w, "Hello World")
-	})
-
-	http.ListenAndServe(":"+Port, nil)	
+	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
 		GetUpdatesOpts: &gotgbot.GetUpdatesOpts{
@@ -59,8 +53,7 @@ func main() {
 }
 
 
-func start(b *gotgbot.Bot, ctx *ext.Context) error {
-    // Get the message from the context
+func start(b *gotgbot.Bot, ctx *ext.Context) error {    
     message := ctx.Message
 	
     _, err := message.Reply(b, "Hey I am Image download bot", &gotgbot.SendMessageOpts{})
