@@ -42,24 +42,27 @@ func searchPinterest(query string) ([]string, error) {
  return urls, nil
 }
 
-
-func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {    
+func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
-    query := strings.Replace(m, "/h", "", -1)
+    query := strings.Replace(message.Text, "/h", "", -1)
     urls, err := searchPinterest(query)
-    if err != nil {       
+    if err != nil {
       fmt.Println(err)
       message.Reply(b, "Image not found", &gotgbot.SendMessageOpts{})
-      return nil       
+      return err
+    }
+    
     media := make([]gotgbot.InputMedia, 0)
-    for _, fuck := range urls {
-      media = append(media, gotgbot.InputMediaPhoto{
-          Media: fuck,
-      })
-    b.SendMediaGroup(      
-      ctx.EffectiveUser.Id,
-      media,
-      &gotgbot.SendMediaGroupOpts{},
+    for _, url := range urls {
+        media = append(media, gotgbot.InputMediaPhoto{
+            Media: url,
+        })
+    }
+    
+    b.SendMediaGroup(
+        ctx.EffectiveUser.Id,
+        media,
+        &gotgbot.SendMediaGroupOpts{},
     )
     return nil
-}   
+}
