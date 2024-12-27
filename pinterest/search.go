@@ -51,7 +51,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
       fmt.Println(err)
       message.Reply(b, "Image not found", &gotgbot.SendMessageOpts{})
       return nil       
-    media := []
+    media := make([]gotgbot.InputMedia, 0)
     for _, fuck := range urls {
       media = append(media, gotgbot.InputMediaPhoto{
           Media: fuck,
