@@ -2,6 +2,7 @@ package main
 
 import (	
 	"log"
+	""net/http"
 	"os"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
@@ -10,20 +11,21 @@ import (
 
 
 func main() {
+	Port = 8080
+	
+	go func() {
+		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+			fmt.Fprintf(w, "Waku Waku")
+		})
+
+		http.ListenAndServe(":"+Port, nil)
+	}()
+	
 	token := os.Getenv("TOKEN")
 	if token == "" {
 		panic("TOKEN environment variable is empty")
 	}
 
-	webhookDomain := os.Getenv("WEBHOOK_DOMAIN")
-	if webhookDomain == "" {
-		panic("WEBHOOK_DOMAIN environment variable is empty")
-	}
-	
-	webhookSecret := os.Getenv("WEBHOOK_SECRET")
-	if webhookSecret == "" {
-		panic("WEBHOOK_SECRET environment variable is empty")
-	}
 	
 	b, err := gotgbot.NewBot(token, nil)
 	if err != nil {
@@ -39,25 +41,18 @@ func main() {
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))	
-	webhookOpts := ext.WebhookOpts{
-		ListenAddr:  "localhost:8080",
-		SecretToken: webhookSecret,	
-	}
-	
-	err = updater.StartWebhook(b, "custom-path/"+token, webhookOpts)
-	if err != nil {
-		panic("failed to start webhook: " + err.Error())
-	}
-
-	err = updater.SetAllBotWebhooks(webhookDomain, &gotgbot.SetWebhookOpts{
-		MaxConnections:     100,
+	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
-		SecretToken:        webhookOpts.SecretToken,
+		GetUpdatesOpts: &gotgbot.GetUpdatesOpts{
+			Timeout: 9,
+			RequestOpts: &gotgbot.RequestOpts{
+				Timeout: time.Second * 10,
+			},
+		},
 	})
 	if err != nil {
-		panic("failed to set webhook: " + err.Error())
+		panic("failed to start polling: " + err.Error())
 	}
-
 	log.Printf("%s has been started...\n", b.User.Username)
 
 	updater.Idle()
