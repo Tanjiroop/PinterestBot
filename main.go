@@ -12,14 +12,7 @@ import (
 )
 
 
-func main() {
-	Port := "8080"
-		
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		fmt.Fprintf(w, "Hello World")
-	})
-
-	http.ListenAndServe(":"+Port, nil)	
+func main() {	
 	
 	token := os.Getenv("TOKEN")
 	if token == "" {
@@ -40,7 +33,14 @@ func main() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", start))	
+	dispatcher.AddHandler(handlers.NewCommand("start", start))
+	Port := "8080"
+		
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintf(w, "Hello World")
+	})
+
+	http.ListenAndServe(":"+Port, nil)	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
 		GetUpdatesOpts: &gotgbot.GetUpdatesOpts{
