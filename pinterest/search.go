@@ -44,7 +44,7 @@ func searchPinterest(query string) ([]string, error) {
 
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
-    query := strings.Replace(message.Text, "/h", "", -1)
+    query := strings.Replace(message.TEXT, "/h", "", -1)
     urls, err := searchPinterest(query)
     if err != nil {
       fmt.Println(err)
@@ -54,7 +54,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     
     media := make([]gotgbot.InputMedia, 0)
     for _, url := range urls {
-        media = append(media, gotgbot.InputMediaPhoto{
+        media = append(media, gotgbot.InputFileOrString{
             Media: url,
         })
     }
