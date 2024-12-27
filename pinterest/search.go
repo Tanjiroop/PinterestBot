@@ -26,8 +26,8 @@ func searchPinterest(query string) ([]string, error) {
 
  var result struct {
   Data []struct {
-   URL string json:"url"
-  } json:"data"
+   URL string `json:"url"`
+  } `json:"data"`
  }
  err = json.Unmarshal(body, &result)
  if err != nil {
