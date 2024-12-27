@@ -62,8 +62,17 @@ func main() {
 
 	updater.Idle()
 }
-	
+
+
 func start(b *gotgbot.Bot, ctx *ext.Context) error {
-  message = ctx.Message
-  message.Reply(b, "Hey Iam Image download bot")
+    // Get the message from the context
+    message := ctx.Message
+	
+    _, err := message.Reply(b, "Hey I am Image download bot")
+    if err != nil {
+        return err 
+    }
+
+    return nil 
 }
+
