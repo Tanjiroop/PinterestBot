@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"fmt"
+	"time"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
@@ -12,7 +13,7 @@ import (
 
 
 func main() {
-	Port := 8080
+	Port := "8080"
 	
 	go func() {
 		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
