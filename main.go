@@ -68,7 +68,7 @@ func start(b *gotgbot.Bot, ctx *ext.Context) error {
     // Get the message from the context
     message := ctx.Message
 	
-    _, err := message.Reply(b, "Hey I am Image download bot")
+    _, err := message.Reply(b, "Hey I am Image download bot", &gotgbot.SendMessageOpts{})
     if err != nil {
         return err 
     }
