@@ -41,7 +41,7 @@ func main() {
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
 	webhookOpts := ext.WebhookOpts{
 		Serve: "0.0.0.0",
-		ServePort: 8080		
+		ServePort: 8080,	
 	}
 	
 	err = updater.StartWebhook(b, "custom-path/"+token, webhookOpts)
