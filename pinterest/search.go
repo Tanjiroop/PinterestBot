@@ -62,4 +62,4 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
       &gotgbot.SendMediaGroupOpts{},
     )
     return nil
-   
+}   
