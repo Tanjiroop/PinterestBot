@@ -40,7 +40,7 @@ func main() {
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
 	webhookOpts := ext.WebhookOpts{
-		Serve: "0.0.0.p"
+		Serve: "0.0.0.0",
 		ServePort: 8080		
 	}
 	
