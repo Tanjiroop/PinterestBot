@@ -14,14 +14,12 @@ import (
 
 func main() {
 	Port := "8080"
-	
-	go func() {
-		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-			fmt.Fprintf(w, "Waku Waku")
-		})
+		
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintf(w, "Hello World")
+	})
 
-		http.ListenAndServe(":"+Port, nil)
-	}()
+	http.ListenAndServe(":"+Port, nil)	
 	
 	token := os.Getenv("TOKEN")
 	if token == "" {
