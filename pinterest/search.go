@@ -1,19 +1,15 @@
 package pinterest
 
-import (	
-	"log"
-	"net/http"
-  "encoding/json"
-  "fmt"
-  "io/ioutil"
-  "net/http"
-	"os"
-	"fmt"
-  "strings"
-	"time"
-	"github.com/PaulSonOfLars/gotgbot/v2"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext"	
+import (
+"net/http"
+"encoding/json"   
+"fmt"
+"io/ioutil"		
+"strings"	
+"github.com/PaulSonOfLars/gotgbot/v2"
+"github.com/PaulSonOfLars/gotgbot/v2/ext"	
 )
+
 
 func searchPinterest(query string) ([]string, error) {
  url := fmt.Sprintf("https://horridapi.onrender.com/pinterest?query=%s", query)
