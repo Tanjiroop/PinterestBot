@@ -41,7 +41,7 @@ func main() {
 	dispatcher.AddHandler(handlers.NewCommand("start", start))	
 	webhookOpts := ext.WebhookOpts{
 		ListenAddr:  "localhost:8080",
-		Port: 8080,	
+		SecretToken: webhookSecret,	
 	}
 	
 	err = updater.StartWebhook(b, "custom-path/"+token, webhookOpts)
