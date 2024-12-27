@@ -2,7 +2,7 @@ package main
 
 import (	
 	"log"
-	""net/http"
+	"net/http"
 	"os"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
