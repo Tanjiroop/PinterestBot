@@ -17,6 +17,16 @@ func main() {
 		panic("TOKEN environment variable is empty")
 	}
 
+	webhookDomain := os.Getenv("WEBHOOK_DOMAIN")
+	if webhookDomain == "" {
+		panic("WEBHOOK_DOMAIN environment variable is empty")
+	}
+	
+	webhookSecret := os.Getenv("WEBHOOK_SECRET")
+	if webhookSecret == "" {
+		panic("WEBHOOK_SECRET environment variable is empty")
+	}
+	
 	b, err := gotgbot.NewBot(token, nil)
 	if err != nil {
 		panic("failed to create new bot: " + err.Error())
@@ -31,23 +41,30 @@ func main() {
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
+	webhookOpts := ext.WebhookOpts{
+		ListenAddr:  "localhost:8080", 
+		SecretToken: webhookSecret,    
+	}
+	
+	err = updater.StartWebhook(b, "custom-path/"+token, webhookOpts)
+	if err != nil {
+		panic("failed to start webhook: " + err.Error())
+	}
 
-	err = updater.StartPolling(b, &ext.PollingOpts{
+	err = updater.SetAllBotWebhooks(webhookDomain, &gotgbot.SetWebhookOpts{
+		MaxConnections:     100,
 		DropPendingUpdates: true,
-		GetUpdatesOpts: &gotgbot.GetUpdatesOpts{
-			Timeout: 9,
-			RequestOpts: &gotgbot.RequestOpts{
-				Timeout: time.Second * 10,
-			},
-		},
+		SecretToken:        webhookOpts.SecretToken,
 	})
 	if err != nil {
-		panic("failed to start polling: " + err.Error())
+		panic("failed to set webhook: " + err.Error())
 	}
+
 	log.Printf("%s has been started...\n", b.User.Username)
 
 	updater.Idle()
-
+}
+	
 func start(b *gotgbot.Bot, ctx *ext.Context) error {
   message = ctx.Message
   message.Reply(b, "Hey Iam Image download bot")
