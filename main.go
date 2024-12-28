@@ -10,6 +10,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/Mishel-07/PinterestBot/pinterest"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/message"
 )
 
 
@@ -44,6 +45,7 @@ func main() {
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
 	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
+	dispatcher.AddHandler(handlers.NewMessage(message.Text, pinterest.DownloadSend))
 	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
