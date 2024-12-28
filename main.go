@@ -43,7 +43,7 @@ func main() {
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
-	dispatcher.AddHandler(handlers.NewCommand("h", pinterest.FindImage))
+	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
 	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
