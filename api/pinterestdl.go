@@ -20,12 +20,12 @@ func PinterestDownload(link string) (string, error) {
   }
 
   var data struct {
-   URL string `json:"url"`
+   Link string `json:"link"`
   }
   err = json.Unmarshal(body, &data)
   if err != nil {
    return "", err
   }
 
-  return data.URL, nil
+  return data.Link, nil
  }
