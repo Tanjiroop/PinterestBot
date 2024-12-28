@@ -49,7 +49,8 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     }
 
     query := split[1]
-    urls, err := searchPinterest(query)
+    quotequery := strings.Replace(query, " ", "+", -1)
+    urls, err := searchPinterest(quotequery)
     if err != nil {
         fmt.Println(err)
         message.Reply(b, "Image not found", &gotgbot.SendMessageOpts{})
