@@ -52,7 +52,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     media := make([]gotgbot.InputMedia, 0)
     for _, item := range urls.Data { 
         media = append(media, gotgbot.InputMediaPhoto{
-						Media:   gotgbot.InputFileByReader(item.URL),
+						Media: gotgbot.InputFileByURL(item.URL),
         })        
     }
 
