@@ -2,11 +2,11 @@ package pinterest
 
 import (    
     "fmt"    
-    "strings"
+    "strings"    
     
-    "github.com/Mishel-07/PinterestBot/api"
     "github.com/PaulSonOfLars/gotgbot/v2"
     "github.com/PaulSonOfLars/gotgbot/v2/ext"
+    "github.com/Mishel-07/PinterestBot/api"
 )
 
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
