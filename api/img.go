@@ -5,7 +5,6 @@ import (
     "fmt"
     "io/ioutil"
     "net/http"
-    "strings"
 )
 
 type PinterestResponse struct {
