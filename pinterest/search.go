@@ -39,9 +39,10 @@ func searchPinterest(query string) (PinterestResponse, error) {
     return result, nil
 }
 
+
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
-    query := strings.Replace(message.Text, "/h", "", -1)
+    query := strings.TrimSpace(strings.Replace(message.Text, "/h", "", -1))
     urls, err := searchPinterest(query)
     if err != nil {
         fmt.Println(err)
@@ -50,10 +51,20 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     }
 
     media := make([]gotgbot.InputMedia, 0)
-    for _, item := range urls.Data { 
-        media = append(media, gotgbot.InputMediaPhoto{
-						Media: gotgbot.InputFileByURL(item.URL),
-        })        
+    for _, item := range urls.Data {
+        fmt.Printf("Found image URL: %s\n", item.URL) // Debugging line to print the URL
+        if item.URL != "" { // Check if URL is not empty
+            media = append(media, gotgbot.InputMediaPhoto{
+                Media: gotgbot.InputFileByURL(item.URL), // Change to InputFileByURL
+            })
+        } else {
+            fmt.Println("Skipped empty URL") // Warn about empty URLs
+        }
+    }
+
+    if len(media) == 0 {
+        message.Reply(b, "No media to send", &gotgbot.SendMessageOpts{})
+        return fmt.Errorf("no valid media found to send")
     }
 
     _, err = b.SendMediaGroup(
@@ -61,5 +72,10 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
         media,
         &gotgbot.SendMediaGroupOpts{},
     )
-    return err 
+    if err != nil {
+        fmt.Printf("Error sending media group: %s\n", err) // Log the error
+        return err
+    }
+
+    return nil
 }
