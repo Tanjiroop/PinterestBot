@@ -27,7 +27,7 @@ Make sure to set the following environment variable:
 
 - `BOT_TOKEN` - Obtain this from BotFather
 
-## Deployment
+## Deploy 
 <details><summary>Deploy To Vercel</summary>
 <p>
 Follow these instructions to deploy this repo to <b>vercel</b>
