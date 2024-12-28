@@ -1,66 +1,16 @@
 package pinterest
 
-import (
-	"fmt"
+import (	
 	"regexp"
-	"strings"
-	"net/http"
-	
-	"golang.org/x/net/html"
+	"strings"	
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 )
 
-func ExtractImageUrl(pinterestUrl string) (string, error) {
-	resp, err := http.Get(pinterestUrl)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("error fetching content from URL: %s", resp.Status)
-	}
-
-	doc, err := html.Parse(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	var imageTags []*html.Node
-	var found bool
-
-	finden:
-	for c := doc.FirstChild; c != nil; c = c.NextSibling {
-		if c.Type == html.ElementNode && c.Data == "img" {
-			for _, a := range c.Attr {
-				if a.Key == "class" && (a.Val == "h-image-fit" || a.Val == "h-unsplash-img") {
-					imageTags = append(imageTags, c)
-					found = true
-					break finden
-				}
-			}
-		}
-	}
-
-	if !found {
-		for c := doc.FirstChild; c != nil; c = c.NextSibling {
-			if c.Type == html.ElementNode && c.Data == "img" {
-				for _, a := range c.Attr {
-					if a.Key == "src" && strings.HasPrefix(a.Val, "https://i.pinimg.com/") {
-						imageTags = append(imageTags, c)
-						break
-					}
-				}
-			}
-		}
-	}
-
-	if len(imageTags) > 0 {
-		return imageTags[0].Attr[0].Val, nil
-	}
-
-	return "", nil
+func ExtractURL(message string) string {
+    pattern := regexp.MustCompile(https?://\S+)
+    match := pattern.FindString(message)
+    return match
 }
 
 func DownloadSend(b *gotgbot.Bot, ctx *ext.Context) error {
