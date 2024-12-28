@@ -33,7 +33,7 @@ func DownloadSend(b *gotgbot.Bot, ctx *ext.Context) error {
                fmt.Println(err)
 	       return err
         }
-	photo ;= gotgbot.InputMediaPhoto{			
+	photo := gotgbot.InputMediaPhoto{			
 		Media: gotgbot.InputFileByURL(url),
 	}
 	_, uploadErr := b.SendPhoto(ctx.EffectiveChat.Id, photo.Media, &gotgbot.SendPhotoOpts{})
