@@ -70,7 +70,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     }
    
     if len(media) == 0 {
-        message.Reply(b, "No media to send", &gotgbot.SendMessageOpts{})
+        message.Reply(b, "No Image found", &gotgbot.SendMessageOpts{})
         return fmt.Errorf("no valid media found to send")
     }
  
@@ -89,7 +89,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
         )
         if err != nil {
             fmt.Printf("Error sending media group: %s\n", err)
-            message.Reply(b, "Error sending media group, please try again later.", &gotgbot.SendMessageOpts{})
+            message.Reply(b, "No Image, please try again later.", &gotgbot.SendMessageOpts{})
             return err
         }
       
