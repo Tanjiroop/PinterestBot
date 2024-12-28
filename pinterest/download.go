@@ -8,7 +8,7 @@ import (
 )
 
 func ExtractURL(message string) string {
-    pattern := regexp.MustCompile(https?://\S+)
+    pattern := regexp.MustCompile(`https?://\S+`)
     match := pattern.FindString(message)
     return match
 }
