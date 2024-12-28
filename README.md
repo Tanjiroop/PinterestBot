@@ -1,26 +1,33 @@
 # PinterestBot
 
-Hey, I am a cool and powerful Pinterest Bot with many features! If you want to check out a demo, visit our [Sample bot](https://t.me/GoodPinterestSearchBot). If you have any questions, suggestions, or just want to chat, feel free to join our [Support group](https://t.me/XBOTSUPPORTS) and i can download pinterest photo you just send me a Pinterest image link will download and give you
+Welcome to PinterestBot: your friendly and efficient Pinterest Bot with numerous exciting features! This bot is capable of downloading images from Pinterest links, performing Pinterest searches, accessing Google and Bing images, and even providing wallpapers. 
+
+## Demo and Support
+
+- Try out our [Sample bot](https://t.me/GoodPinterestSearchBot) for a demonstration.
+- Join our [Support group](https://t.me/XBOTSUPPORTS) for any inquiries, feedback, or simply to chat.
 
 ## Commands
-```
-start - Start the bot
-pinterest - Search Pinterest images and download
-```
 
-## Feature
+Here are some of the key commands:
 
-* send a Pinterest link it will download and give
-* pinterest search
-* Google image 
-* bing image
-* wallpaper 
+- `/start` - Start the bot
+- `/pinterest` - Search and download Pinterest images
+
+## Features
+
+- Download images from Pinterest links
+- Perform Pinterest searches
+- Access Google and Bing images
+- Get wallpapers
 
 ## Variables
 
-* `BOT_TOKEN` - You can obtain this from BotFather.
+Make sure to set the following environment variable:
 
-## Deploy
+- `BOT_TOKEN` - Obtain this from BotFather
+
+## Deployment
 <details><summary>Deploy To Vercel</summary>
 <p>
 Follow these instructions to deploy this repo to <b>vercel</b>
