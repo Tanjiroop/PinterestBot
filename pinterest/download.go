@@ -24,7 +24,7 @@ func DownloadSend(b *gotgbot.Bot, ctx *ext.Context) error {
 		return nil
 	}
 
-	link, _ := ExtractURL(chk)
+	link := ExtractURL(chk)
 	photo := gotgbot.InputMediaPhoto{			
 		Media: gotgbot.InputFileByURL(link),
 	}
