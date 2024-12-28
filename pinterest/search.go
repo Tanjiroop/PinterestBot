@@ -3,6 +3,7 @@ package pinterest
 import (    
     "fmt"    
     "strings"
+    
     "github.com/Mishel-07/PinterestBot/api"
     "github.com/PaulSonOfLars/gotgbot/v2"
     "github.com/PaulSonOfLars/gotgbot/v2/ext"
