@@ -33,11 +33,11 @@ func DownloadSend(b *gotgbot.Bot, ctx *ext.Context) error {
                fmt.Println(err)
 	       return err
         }
-	photo = gotgbot.InputMediaPhoto{			
+	photo ;= gotgbot.InputMediaPhoto{			
 		Media: gotgbot.InputFileByURL(url),
 	}
-	_, err := b.SendPhoto(ctx.EffectiveChat.Id, photo.Media, &gotgbot.SendPhotoOpts{})
-	if err != nil {
+	_, uploadErr := b.SendPhoto(ctx.EffectiveChat.Id, photo.Media, &gotgbot.SendPhotoOpts{})
+	if uploadErr != nil {
 		message.Reply(b, "Failed to Send Photo", &gotgbot.SendMessageOpts{})
 		return err
 	}
