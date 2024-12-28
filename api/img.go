@@ -13,7 +13,7 @@ type PinterestResponse struct {
     } `json:"data"` 
 }
 
-func searchPinterest(query string) (PinterestResponse, error) {
+func SearchPinterest(query string) (PinterestResponse, error) {
     url := fmt.Sprintf("https://horridapi.onrender.com/pinterest?query=%s", query)
     resp, err := http.Get(url)
     if err != nil {
