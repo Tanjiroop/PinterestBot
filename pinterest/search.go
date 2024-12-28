@@ -59,7 +59,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     // Create media slice
     media := make([]gotgbot.InputMedia, 0)
     for _, item := range urls.Data {
-        fmt.Printf("Found image URL: %s\n", item.URL
+        fmt.Printf("Found image URL: %s\n", item.URL)
         if item.URL != "" { 
             media = append(media, gotgbot.InputMediaPhoto{
                 Media: gotgbot.InputFileByURL(item.URL),
