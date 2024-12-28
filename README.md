@@ -36,7 +36,6 @@ Follow these instructions to deploy this repo to <b>vercel</b>
 <li>Go to your <a href="https://vercel.com">vercel</a> dashboard and create a <b>Add New > Project</b></li>
 <li>Fill in the <b>TOKEN</b> environment</li>
 <li>Click <b>Deploy</b> and wait</li>
-<li>Open your app and put in your bot token and click <b>Connect</b></li>
 </ol>
 </p>
 </details>
