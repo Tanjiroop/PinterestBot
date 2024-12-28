@@ -42,9 +42,11 @@ func searchPinterest(query string) (PinterestResponse, error) {
 
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
-    query := strings.SplitN(message.GetText(), " ", 2)
+    split := strings.SplitN(message.GetText(), " ", 2)
+    query := split[1]
+    fmt.Printf(split)
     message.Reply(b, query, &gotgbot.SendMessageOpts{})
-	if len(query) < 2 {     
+    if len(query) < 2 {     
         message.Reply(b, "No Query Provied So i can't send Photo, so Please Provide Query Eg: /pinterest Iron man", &gotgbot.SendMessageOpts{})
         return fmt.Errorf("no query provided")
     }
