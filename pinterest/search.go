@@ -42,10 +42,10 @@ func searchPinterest(query string) (PinterestResponse, error) {
 
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
-    query := strings.TrimSpace(strings.Replace(message.Text, "/h", "", -1))
+    query := strings.TrimSpace(strings.Replace(message.Text, "/pinterest", "", -1))
    
     if query == "" {
-        message.Reply(b, "Please provide your query", &gotgbot.SendMessageOpts{})
+        message.Reply(b, "No Query Provied So i can't send Photo, so Please Provide Query Eg: /pinterest Iron man", &gotgbot.SendMessageOpts{})
         return fmt.Errorf("no query provided")
     }
 
@@ -55,8 +55,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
         message.Reply(b, "Image not found", &gotgbot.SendMessageOpts{})
         return err
     }
-
-    // Create media slice
+    
     media := make([]gotgbot.InputMedia, 0)
     for _, item := range urls.Data {
         fmt.Printf("Found image URL: %s\n", item.URL)
