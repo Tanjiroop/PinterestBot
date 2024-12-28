@@ -9,7 +9,7 @@ import (
 
 type PinterestResponse struct {
     Data []struct {
-        URL string `json:"url"` 
+        URL string `json:"url"
     } `json:"data"` 
 }
 
