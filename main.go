@@ -66,7 +66,7 @@ func main() {
 func start(b *gotgbot.Bot, ctx *ext.Context) error {    
     message := ctx.Message
 	
-    _, err := message.Reply(b, "Hey! I'm PinterestBot. You can search for Pinterest videos or photos, and you can download them too. I can also provide Google images, Bing images, etc.", &gotgbot.SendMessageOpts{})
+    _, err := message.Reply(b, "<b>Hey, I'm PinterestBot. You can search for Pinterest videos or photos, and you can download them too. I can also provide Google images, Bing images, etc.<b>\n\n<b>Commands:</b>\n\n/pinterest - search and download pinterest image", &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})
     if err != nil {
         return nil
     }
