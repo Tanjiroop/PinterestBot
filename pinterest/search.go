@@ -43,8 +43,7 @@ func searchPinterest(query string) (PinterestResponse, error) {
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
     query := strings.TrimSpace(strings.Replace(message.Text, "/h", "", -1))
-
-    // Check if query is empty
+   
     if query == "" {
         message.Reply(b, "Please provide your query", &gotgbot.SendMessageOpts{})
         return fmt.Errorf("no query provided")
@@ -60,7 +59,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     // Create media slice
     media := make([]gotgbot.InputMedia, 0)
     for _, item := range urls.Data {
-        fmt.Printf("Found image URL: %s\n", item.URL) // Debug line to print the URL
+        fmt.Printf("Found image URL: %s\n", item.URL
         if item.URL != "" { 
             media = append(media, gotgbot.InputMediaPhoto{
                 Media: gotgbot.InputFileByURL(item.URL),
@@ -69,23 +68,20 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
             fmt.Println("Skipped empty URL")
         }
     }
-
-    // Check if media slice is empty
+   
     if len(media) == 0 {
         message.Reply(b, "No media to send", &gotgbot.SendMessageOpts{})
         return fmt.Errorf("no valid media found to send")
     }
-
-    // Send media in batches of 10 or less
+ 
     for i := 0; i < len(media); i += 10 {
         end := i + 10
         if end > len(media) {
             end = len(media)
         }
 
-        batch := media[i:end]
+        batch := media[i:end]        
         
-        // Attempt to send a media group
         _, err = b.SendMediaGroup(
             ctx.EffectiveUser.Id,
             batch,
@@ -96,9 +92,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
             message.Reply(b, "Error sending media group, please try again later.", &gotgbot.SendMessageOpts{})
             return err
         }
-
-        // Notify the user about the sent batch
-        message.Reply(b, "Sent batch of images.", &gotgbot.SendMessageOpts{})
+      
     }
 
     return nil
