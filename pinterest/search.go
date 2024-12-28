@@ -11,36 +11,34 @@ import (
 )
 
 
-func searchPinterest(query string) ([]string, error) {
+type PinterestResponse struct {
+ Data []struct {
+  URL string json:"url"
+ } json:"data"
+}
+
+func searchPinterest(query string) (PinterestResponse, error) {
  url := fmt.Sprintf("https://horridapi.onrender.com/pinterest?query=%s", query)
  resp, err := http.Get(url)
  if err != nil {
-  return nil, err
+  return PinterestResponse{}, err
  }
  defer resp.Body.Close()
 
  body, err := ioutil.ReadAll(resp.Body)
  if err != nil {
-  return nil, err
+  return PinterestResponse{}, err
  }
 
- var result struct {
-  Data []struct {
-   URL string `json:"url"`
-  } `json:"data"`
- }
+ var result PinterestResponse
  err = json.Unmarshal(body, &result)
  if err != nil {
-  return nil, err
+  return PinterestResponse{}, err
  }
 
- var urls []string
- for _, item := range result.Data {
-  urls = append(urls, item.URL)
- }
-
- return urls, nil
+ return result, nil
 }
+
 
 func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     message := ctx.Message
@@ -53,9 +51,9 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
     }
     
     media := make([]gotgbot.InputMedia, 0)
-    for _, url := range urls {
+    for _, url := range urls.Data {
         media = append(media, gotgbot.InputFileOrString{
-            Media: url,
+            Media: url.URL,
         })
     }
     
