@@ -1,6 +1,7 @@
 package pinterest
 
-import (	
+import (
+	"fmt"
 	"regexp"
 	"strings"	
 	"github.com/PaulSonOfLars/gotgbot/v2"
