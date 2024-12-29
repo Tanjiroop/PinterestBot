@@ -1,4 +1,4 @@
-package pinterest 
+package pinterest
 
 import (
 	"fmt"
@@ -22,16 +22,16 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 	images := api.FetchWallpapers(quotequery)
 
 	media := make([]gotgbot.InputMedia, 0)
-	cound := 0
+	count := 0
 	for _, item := range images {
 		fmt.Printf("Found image URL: %s\n", item)
-		cound = 1
-		if cound == 10 {
-                      break
-                }
+		if count == 10 {
+			break
+		}
 		media = append(media, gotgbot.InputMediaPhoto{
 			Media: gotgbot.InputFileByURL(item),
 		})
+		count++
 	}
 
 	if len(media) == 0 {
@@ -44,7 +44,6 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		media,
 		&gotgbot.SendMediaGroupOpts{},
 	)
-	
 
 	return nil
 }
