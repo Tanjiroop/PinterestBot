@@ -1,4 +1,4 @@
-package pinteres
+package pinterest
 
 import (
 	"fmt"
