@@ -1,4 +1,4 @@
-package pinterest
+package pinteres
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		return nil
 	}
 	quotequery := strings.Replace(query, " ", "+", -1)
-	images := api.FetchWallpapers(quotequery)
+	images := api.ScrapWallpapers(quotequery)
 
 	media := make([]gotgbot.InputMedia, 0)
 	count := 0
