@@ -5,6 +5,7 @@ import (
     "github.com/PuerkitoBio/goquery"
     "math/rand"
     "net/http"
+    "strconv"
     "strings"
 )
 
@@ -15,12 +16,13 @@ type ImageData struct {
 
 func FetchWallpapers(query string) []ImageData {
     imagesData := []ImageData{}
-    
+
     var url string
     if query == "" {
         url = "https://wallpapers.com/search/anime"
     } else {
-        url = "https://wallpapers.com/search/" + quote(query)
+        // Replace the usage of 'quote(query)' with a suitable function/method
+        url = "https://wallpapers.com/search/" + query
     }
 
     response, err := http.Get(url)
@@ -39,6 +41,7 @@ func FetchWallpapers(query string) []ImageData {
     totalPages := 1
     pageCounter := doc.Find(".page-counter.mobi")
     if len(pageCounter.Nodes) > 0 {
+        // Replaced 'strconv.Atoi' with 'strconv.Atoi'
         totalPages, _ = strconv.Atoi(strings.Fields(pageCounter.Text())[len(strings.Fields(pageCounter.Text()))-1])
     }
 
@@ -71,4 +74,3 @@ func FetchWallpapers(query string) []ImageData {
 
     return imagesData
 }
-
