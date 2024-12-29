@@ -13,7 +13,7 @@ type BingResponse struct {
     } `json:"result"` 
 }
 
-func SearchBing(query string) (PinterestResponse, error) {
+func SearchBing(query string) (BingResponse, error) {
     url := fmt.Sprintf("https://horridapi.onrender.com/images?page=7&query=%s", query)
     resp, err := http.Get(url)
     if err != nil {
