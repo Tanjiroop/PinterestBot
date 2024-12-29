@@ -39,6 +39,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 
 	if len(media) == 0 {
 		message.Reply(b, "No Image found", &gotgbot.SendMessageOpts{})
+		b.DeleteMessage(msg.Chat.Id, msg.MessageId, &gotgbot.DeleteMessageOpts{})
 		return fmt.Errorf("no valid media found to send")
 	}
 
