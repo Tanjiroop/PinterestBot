@@ -42,16 +42,11 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 
         batch := media[i:end]        
         
-        _, err = b.SendMediaGroup(
+        b.SendMediaGroup(
             ctx.EffectiveUser.Id,
             batch,
             &gotgbot.SendMediaGroupOpts{},
-        )
-        if err != nil {
-            fmt.Printf("Error sending media group: %s\n", err)
-            message.Reply(b, "No Image, please try again later.", &gotgbot.SendMessageOpts{})
-            return err
-        }
+        )        
       
     }
 
