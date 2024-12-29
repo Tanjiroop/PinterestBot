@@ -56,7 +56,7 @@ func FindImage(b *gotgbot.Bot, ctx *ext.Context) error {
         
     _, err = b.SendMediaGroup(
         ctx.EffectiveUser.Id,
-        batch,
+        media,
         &gotgbot.SendMediaGroupOpts{},
     )
     b.DeleteMessage(msg.Chat.Id, msg.MessageId, &gotgbot.DeleteMessageOpts{})
