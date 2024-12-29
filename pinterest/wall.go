@@ -18,7 +18,10 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 	}
 
 	query := split[1]
-	msg, fck := message.Reply(b, "<b>Searching...🔎</b>", &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})	
+	msg, fck := message.Reply(b, "<b>Searching...🔎</b>", &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})
+	if fck != nil {
+		return nil
+	}
 	quotequery := strings.Replace(query, " ", "+", -1)
 	images := api.FetchWallpapers(quotequery)
 
@@ -44,7 +47,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		media,
 		&gotgbot.SendMediaGroupOpts{},
 	)
-	msg.Delete(&gotgbot.DeleteMessageOpts{})
+	b.DeleteMessage(msg.Chat.Id, msg.MessageId, &gotgbot.DeleteMessageOpts{})
 
 	return nil
 }
