@@ -3,6 +3,7 @@ package pinterest
 import (
  "fmt"
  "strings"
+ "math/rand"
 
  "github.com/PaulSonOfLars/gotgbot/v2"
  "github.com/PaulSonOfLars/gotgbot/v2/ext"
@@ -14,6 +15,7 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
  if query == "" {
   _, err := ctx.InlineQuery.Answer(b, []gotgbot.InlineQueryResult{
    gotgbot.InlineQueryResultArticle{
+    Id:    fmt.Sprintf("%d", rand.Int()),
     Title: "No Query Provided",
     InputMessageContent: &gotgbot.InputTextMessageContent{
      MessageText: "Please provide a query.",
@@ -29,6 +31,7 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
   fmt.Println(err)
   _, err = ctx.InlineQuery.Answer(b, []gotgbot.InlineQueryResult{
    gotgbot.InlineQueryResultArticle{
+    Id:    fmt.Sprintf("%d", rand.Int()),
     Title: "Image not found",
     InputMessageContent: &gotgbot.InputTextMessageContent{
      MessageText: "Image not found for your query.",
@@ -42,6 +45,7 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
  for _, item := range urls.Data {
   if item.URL != "" {
    media = append(media, gotgbot.InlineQueryResultPhoto{
+    Id:    fmt.Sprintf("%d", rand.Int()),
     PhotoUrl: item.URL,
     Title:    "Found Image",
     ThumbnailUrl: item.URL,
