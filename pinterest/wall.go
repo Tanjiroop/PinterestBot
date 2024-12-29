@@ -1,3 +1,5 @@
+package pinterest 
+
 import (
 	"fmt"
 	"strings"
