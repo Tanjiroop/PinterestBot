@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func FetchWallpapers(query string) []string {
+func ScrapWallpapers(query string) []string {
 	imagesData := make([]string, 0)
-	url := "https://wallpapers.com/search/" + query	
+	url := "ttps://wallpapers.com/search/" + query	
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Error fetching the URL:", err)
