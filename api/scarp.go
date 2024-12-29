@@ -11,14 +11,7 @@ import (
 
 func FetchWallpapers(query string) []string {
 	imagesData := make([]string, 0)
-
-	var url string
-	if query == "" {
-		url = "https://wallpapers.com/search/anime"
-	} else {
-		url = "https://wallpapers.com/search/" + query
-	}
-
+	url = "https://wallpapers.com/search/" + query	
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Error fetching the URL:", err)
