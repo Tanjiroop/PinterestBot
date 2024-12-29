@@ -10,7 +10,7 @@ import (
 )
 
 func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
-	message := ctx.Message
+	message := ctx.Message	
 	split := strings.SplitN(message.GetText(), " ", 2)
 	if len(split) < 2 {
 		message.Reply(b, "<b>No Query Provided So I can't send Photo, so Please Provide Query</b>", &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})
@@ -18,13 +18,13 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 	}
 
 	query := split[1]
+	msg := message.Reply(b, "<b>Searching...🔎</b>", &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})	
 	quotequery := strings.Replace(query, " ", "+", -1)
 	images := api.FetchWallpapers(quotequery)
 
 	media := make([]gotgbot.InputMedia, 0)
 	count := 0
-	for _, item := range images {
-		fmt.Printf("Found image URL: %s\n", item)
+	for _, item := range images {	
 		if count == 10 {
 			break
 		}
@@ -44,6 +44,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		media,
 		&gotgbot.SendMediaGroupOpts{},
 	)
+	msg.Delete()
 
 	return nil
 }
