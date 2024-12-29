@@ -44,7 +44,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		media,
 		&gotgbot.SendMediaGroupOpts{},
 	)
-	msg.Delete()
+	msg.Delete(&gotgbot.DeleteMessageOpts{})
 
 	return nil
 }
