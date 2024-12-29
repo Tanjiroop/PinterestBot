@@ -47,7 +47,7 @@ func main() {
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
 	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
 	dispatcher.AddHandler(handlers.NewMessage(message.Text, pinterest.DownloadSend))
-	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, pinterest.InlineSearch))
+	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, pinterest.FindImageInline))
 	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
