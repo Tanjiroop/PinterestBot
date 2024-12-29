@@ -41,7 +41,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 
 	b.SendMediaGroup(
 		ctx.EffectiveUser.Id,
-		batch,
+		media,
 		&gotgbot.SendMediaGroupOpts{},
 	)
 	
