@@ -25,7 +25,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
     for _, item := range images {
         fmt.Printf("Found image URL: %s\n", item)
         media = append(media, gotgbot.InputMediaPhoto{
-            Media: gotgbot.InputFileByURL(item["url"]),
+            Media: gotgbot.InputFileByURL(item.URL),
             })        
     }
    
