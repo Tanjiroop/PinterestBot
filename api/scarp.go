@@ -55,8 +55,7 @@ func FetchWallpapers(query string) {
         return imagesData
     }
 
-    doc.Find("li.content-card").Each(func(i int, s *goquery.Selection) {
-        aTag := s.Find("a")
+    doc.Find("li.content-card").Each(func(i int, s *goquery.Selection) {      
         imgTag := s.Find("img")        
         imgURL := imgTag.AttrOr("data-src", "")
         if imgURL != "" {
