@@ -10,7 +10,7 @@ import (
 )
 
 
-func FetchWallpapers(query string) []ImageData {
+func FetchWallpapers(query string) {
     imagesData := make([]string, 0)
 
     var url string
