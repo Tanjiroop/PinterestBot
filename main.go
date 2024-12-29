@@ -11,6 +11,7 @@ import (
 	"github.com/Mishel-07/PinterestBot/pinterest"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/message"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
 )
 
 
@@ -46,6 +47,7 @@ func main() {
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
 	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
 	dispatcher.AddHandler(handlers.NewMessage(message.Text, pinterest.DownloadSend))
+	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, pinterest.InlineSearch))
 	
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
