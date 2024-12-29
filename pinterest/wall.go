@@ -34,7 +34,7 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		return fmt.Errorf("no valid media found to send")
 	}
 
-	for i := 0; i < len(media); i += 10 {
+	for i := 0; i < len(media) && i < 10; i++ {
 		end := i + 10
 		if end > len(media) {
 			end = len(media)
