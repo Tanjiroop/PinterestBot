@@ -9,6 +9,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/Mishel-07/PinterestBot/pinterest"
+	"github.com/Mishel-07/PinterestBot/settings"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/message"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
@@ -44,7 +45,7 @@ func main() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", start))
+	dispatcher.AddHandler(handlers.NewCommand("start", settings.Start))
 	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
 	dispatcher.AddHandler(handlers.NewMessage(message.Text, pinterest.DownloadSend))
 	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, pinterest.FindImageInline))
