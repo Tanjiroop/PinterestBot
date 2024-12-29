@@ -11,7 +11,7 @@ import (
 
 
 func FetchWallpapers(query string) []ImageData {
-    imagesData := make([])
+    imagesData := make([], 0)
 
     var url string
     if query == "" {
