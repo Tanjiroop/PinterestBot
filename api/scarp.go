@@ -10,7 +10,7 @@ import (
     "github.com/PuerkitoBio/goquery"
 )
 
-func fetchWallpapers(query string) []map[string]string {
+func FetchWallpapers(query string) []map[string]string {
     imagesData := []map[string]string{}
 
     url := "https://wallpapers.com/search/"
