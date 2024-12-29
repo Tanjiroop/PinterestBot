@@ -52,7 +52,7 @@ func FetchWallpapers(query string) []string {
 		imgURL := imgTag.AttrOr("data-src", "")
 		if imgURL != "" {
 			imageURL := strings.Join(strings.Split(pageURL, "/")[:len(strings.Split(pageURL, "/")) - 1], "/") + imgURL
-			okayurl := strings.Replace(imageURL, "searc/", "", 1)
+			okayurl := strings.Replace(imageURL, "search/", "", 1)
 			imagesData = append(imagesData, okayurl)
 		}
 	})
