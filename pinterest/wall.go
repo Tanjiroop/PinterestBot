@@ -22,8 +22,13 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 	images := api.FetchWallpapers(quotequery)
 
 	media := make([]gotgbot.InputMedia, 0)
+	cound := 0
 	for _, item := range images {
 		fmt.Printf("Found image URL: %s\n", item)
+		cound = 1
+		if cound == 10 {
+                      break
+                }
 		media = append(media, gotgbot.InputMediaPhoto{
 			Media: gotgbot.InputFileByURL(item),
 		})
@@ -34,20 +39,12 @@ func WallSearch(b *gotgbot.Bot, ctx *ext.Context) error {
 		return fmt.Errorf("no valid media found to send")
 	}
 
-	for i := 0; i < len(media) && i < 10; i++ {
-		end := i + 10
-		if end > len(media) {
-			end = len(media)
-		}
-
-		batch := media[i:end]
-
-		b.SendMediaGroup(
-			ctx.EffectiveUser.Id,
-			batch,
-			&gotgbot.SendMediaGroupOpts{},
-		)
-	}
+	b.SendMediaGroup(
+		ctx.EffectiveUser.Id,
+		batch,
+		&gotgbot.SendMediaGroupOpts{},
+	)
+	
 
 	return nil
 }
