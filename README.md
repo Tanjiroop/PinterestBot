@@ -4,7 +4,7 @@ Welcome to PinterestBot: your friendly and efficient Pinterest Bot with numerous
 
 ## Demo and Support
 
-- Try out our [Sample bot](https://t.me/GoodPinterestSearchBot) for a demonstration.
+- Try out our [Sample bot](https://t.me/ImgRobot) for a demonstration.
 - Join our [Support group](https://t.me/XBOTSUPPORTS) for any inquiries, feedback, or simply to chat.
 
 ## Commands
