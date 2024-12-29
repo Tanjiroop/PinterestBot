@@ -20,8 +20,7 @@ func FetchWallpapers(query string) []ImageData {
     var url string
     if query == "" {
         url = "https://wallpapers.com/search/anime"
-    } else {
-        // Replace the usage of 'quote(query)' with a suitable function/method
+    } else {        
         url = "https://wallpapers.com/search/" + query
     }
 
@@ -40,8 +39,7 @@ func FetchWallpapers(query string) []ImageData {
 
     totalPages := 1
     pageCounter := doc.Find(".page-counter.mobi")
-    if len(pageCounter.Nodes) > 0 {
-        // Replaced 'strconv.Atoi' with 'strconv.Atoi'
+    if len(pageCounter.Nodes) > 0 {        
         totalPages, _ = strconv.Atoi(strings.Fields(pageCounter.Text())[len(strings.Fields(pageCounter.Text()))-1])
     }
 
