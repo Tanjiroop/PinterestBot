@@ -42,9 +42,9 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
  for _, item := range urls.Data {
   if item.URL != "" {
    media = append(media, gotgbot.InlineQueryResultPhoto{
-    PhotoURL: item.URL,
+    PhotoUrl: item.URL,
     Title:    "Found Image",
-    ThumbURL: item.URL,
+    ThumbUrl: item.URL,
    })
   } else {
    fmt.Println("Skipped empty URL")
