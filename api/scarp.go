@@ -2,66 +2,73 @@ package api
 
 import (
     "fmt"
-    "log"
+    "github.com/PuerkitoBio/goquery"
     "math/rand"
     "net/http"
     "strings"
-
-    "github.com/PuerkitoBio/goquery"
 )
 
-func FetchWallpapers(query string) []map[string]string {
-    imagesData := []map[string]string{}
+type ImageData struct {
+    Title string
+    URL   string
+}
 
-    url := "https://wallpapers.com/search/"
-    if query != "" {
-        url = "https://wallpapers.com/search/" + query
+func FetchWallpapers(query string) []ImageData {
+    imagesData := []ImageData{}
+    
+    var url string
+    if query == "" {
+        url = "https://wallpapers.com/search/anime"
+    } else {
+        url = "https://wallpapers.com/search/" + quote(query)
     }
 
     response, err := http.Get(url)
     if err != nil {
-        log.Fatal(err)
+        fmt.Println("Error fetching the URL:", err)
+        return imagesData
     }
     defer response.Body.Close()
 
     doc, err := goquery.NewDocumentFromReader(response.Body)
     if err != nil {
-        log.Fatal(err)
+        fmt.Println("Error loading the HTML:", err)
+        return imagesData
     }
 
     totalPages := 1
-    pageCounter := doc.Find(".page-counter.mobi").First().Text()
-    if pageCounter != "" {
-        fmt.Sscanf(strings.Split(pageCounter, " ")[len(strings.Split(pageCounter, " "))-1], "%d", &totalPages)
+    pageCounter := doc.Find(".page-counter.mobi")
+    if len(pageCounter.Nodes) > 0 {
+        totalPages, _ = strconv.Atoi(strings.Fields(pageCounter.Text())[len(strings.Fields(pageCounter.Text()))-1])
     }
 
     page := rand.Intn(totalPages) + 1
+    pageURL := url + "?p=" + strconv.Itoa(page)
 
-    url = "https://wallpapers.com/search/"
-    if query != "" {
-        url = "https://wallpapers.com/search/" + query
-    }
-    url += fmt.Sprintf("?p=%d", page)
-
-    response, err = http.Get(url)
+    response, err = http.Get(pageURL)
     if err != nil {
-        log.Fatal(err)
+        fmt.Println("Error fetching the page URL:", err)
+        return imagesData
     }
     defer response.Body.Close()
 
     doc, err = goquery.NewDocumentFromReader(response.Body)
     if err != nil {
-        log.Fatal(err)
+        fmt.Println("Error loading the HTML:", err)
+        return imagesData
     }
 
     doc.Find("li.content-card").Each(func(i int, s *goquery.Selection) {
-        title := s.Find("a").AttrOr("title", "")
-        imgURL := s.Find("img").AttrOr("data-src", "")
+        aTag := s.Find("a")
+        imgTag := s.Find("img")
+        title := aTag.AttrOr("title", "")
+        imgURL := imgTag.AttrOr("data-src", "")
         if title != "" && imgURL != "" {
-            imageURL := strings.Join(strings.Split(url, "/")[:len(strings.Split(url, "/"))-1], "/") + imgURL
-            imagesData = append(imagesData, map[string]string{"title": title, "url": imageURL})
+            imageURL := strings.Join(strings.Split(pageURL, "/")[:len(strings.Split(pageURL, "/"))-1], "/") + imgURL
+            imagesData = append(imagesData, ImageData{Title: title, URL: imageURL})
         }
     })
 
     return imagesData
 }
+
