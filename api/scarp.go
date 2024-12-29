@@ -9,13 +9,9 @@ import (
     "strings"
 )
 
-type ImageData struct {
-    Title string
-    URL   string
-}
 
 func FetchWallpapers(query string) []ImageData {
-    imagesData := []ImageData{}
+    imagesData := []
 
     var url string
     if query == "" {
@@ -61,12 +57,11 @@ func FetchWallpapers(query string) []ImageData {
 
     doc.Find("li.content-card").Each(func(i int, s *goquery.Selection) {
         aTag := s.Find("a")
-        imgTag := s.Find("img")
-        title := aTag.AttrOr("title", "")
+        imgTag := s.Find("img")        
         imgURL := imgTag.AttrOr("data-src", "")
-        if title != "" && imgURL != "" {
+        if imgURL != "" {
             imageURL := strings.Join(strings.Split(pageURL, "/")[:len(strings.Split(pageURL, "/"))-1], "/") + imgURL
-            imagesData = append(imagesData, ImageData{Title: title, URL: imageURL})
+            imagesData = append(imagesData, imageURL)
         }
     })
 
