@@ -26,7 +26,7 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
     }
 
     quotequery := strings.Replace(query, " ", "+", -1)
-    urls, err := api.SearchPinterest(quotequery)
+    urls, err := api.SearchBingInline(quotequery)
     if err != nil {
         fmt.Println(err)
         _, err = ctx.InlineQuery.Answer(b, []gotgbot.InlineQueryResult{
@@ -42,7 +42,7 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
     }
 
     media := make([]gotgbot.InlineQueryResult, 0)
-    for _, item := range urls.Data {
+    for _, item := range urls.Result {
         if item.URL != "" {
             media = append(media, gotgbot.InlineQueryResultPhoto{
                 Id: fmt.Sprintf("%d", rand.Int()),
