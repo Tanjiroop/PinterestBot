@@ -47,7 +47,7 @@ func main() {
 	updater := ext.NewUpdater(dispatcher, nil)
 	dispatcher.AddHandler(handlers.NewCommand("start", settings.Start))
 	dispatcher.AddHandler(handlers.NewCommand("pinterest", pinterest.FindImage))
-	dispatcher.AddHandler(handlers.NewCommand([]string{"wall", "wallpapers", "wallpaper"}, pinterest.WallSearch))
+	dispatcher.AddHandler(handlers.NewCommand("wallpaper", pinterest.WallSearch))
 	dispatcher.AddHandler(handlers.NewMessage(message.Text, pinterest.DownloadSend))
 	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, pinterest.FindImageInline))
 	
