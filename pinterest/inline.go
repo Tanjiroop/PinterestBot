@@ -67,8 +67,6 @@ func FindImageInline(b *gotgbot.Bot, ctx *ext.Context) error {
         return err
     }
 
-    _, err = ctx.InlineQuery.Answer(b, media, &gotgbot.AnswerInlineQueryOpts{
-		IsPersonal: true,
-	})
+    _, err = ctx.InlineQuery.Answer(b, media, nil)
     return err
 }
