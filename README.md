@@ -9,10 +9,12 @@ Welcome to PinterestBot: your friendly and efficient Pinterest Bot with numerous
 
 ## Commands
 
-Here are some of the key commands:
-
-- `/start` - Start the bot
-- `/pinterest` - Search and download Pinterest images
+```
+/start - Start the bot
+/pinterest - Search and download Pinterest images
+/wallpaper - wallpaper image from wallpaper.com
+/img - from bing image
+```
 
 ## Features
 
