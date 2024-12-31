@@ -14,7 +14,7 @@ type PinterestResponse struct {
 }
 
 func SearchPinterest(query string) (PinterestResponse, error) {
-    url := fmt.Sprintf("https://horridapi.onrender.com/pinterest?query=%s", query)
+    url := fmt.Sprintf("https://horrid-api.vercel.app/pinterest?query=%s", query)
     resp, err := http.Get(url)
     if err != nil {
         return PinterestResponse{}, err
