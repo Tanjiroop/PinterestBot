@@ -13,6 +13,25 @@ type BingResponse struct {
     } `json:"result"` 
 }
 
+// Exported function to handle web requests
+func BingSearchHandler(w http.ResponseWriter, r *http.Request) {
+    query := r.URL.Query().Get("query")
+    if query == "" {
+        http.Error(w, "Query parameter is required", http.StatusBadRequest)
+        return
+    }
+
+    result, err := SearchBing(query)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(result)
+}
+
+// Exported function to perform Bing search
 func SearchBing(query string) (BingResponse, error) {
     url := fmt.Sprintf("https://horrid-api.vercel.app/images?page=7&query=%s", query)
     resp, err := http.Get(url)
@@ -35,6 +54,7 @@ func SearchBing(query string) (BingResponse, error) {
     return result, nil
 }
 
+// Private function
 func SearchBingInline(query string) (BingResponse, error) {
     url := fmt.Sprintf("https://horrid-api.vercel.app/images?page=40&query=%s", query)
     resp, err := http.Get(url)
